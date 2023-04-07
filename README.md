@@ -1,6 +1,6 @@
-# SilverCoin
+# SilverCoin (now in development)
 Django website for personal finance accounting. Contains directories of counterparties and accounting items, documents of receipts and expenditures of money. It contains the possibility of entering, correcting and deleting data, list filters, building reports for periods and visual charts. 
-Now in development.
+
 
 ![bWetLzeU](https://user-images.githubusercontent.com/99164769/230575537-3c1ff604-8e9d-4708-aa50-b37dca21248a.jpg)
 
