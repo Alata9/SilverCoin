@@ -1,0 +1,48 @@
+{% extends 'registers/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container-fluid">
+
+    <div class="row p-2">
+        <div class="col-md-3 border p-3 shadow">
+            <h4>Add payment</h4>
+<!--            <hr>-->
+            <form  method='POST'>
+                {% csrf_token %}
+                {{ form|crispy }}
+                <br>
+                <input class="btn btn-info btn-block" type="submit" name="btn_save_payment" value="ADD NEW">
+            </form>
+        </div>
+        <div class="col-md-9 border p-3 shadow">
+            <div class="table-responsive" data-mdb-fixed-header="true" style="height: 500px">
+                <table class="table table-sm table-scroll table-striped table-bordered">
+                    <tr>
+                        <th align="right">Date</th><th align="right">Amount</th>
+                        <th>Counterparty</th>
+                        <th>Item</th>
+                        <th>Comments</th>
+                        <th>Edit</th>
+                        <th>Del</th>
+                    </tr>
+                    {% for p in pays %}
+                    <tr>
+                        <td width="100" align="right">{{p.date|date:"d.m.Y"}}</td>
+                        <td width="100" align="right">{{p.amount}}</td>
+                        <td width="150">{{p.counterparty}}</td>
+                        <td width="150">{{p.item}}</td>
+                        <td width="200">{{p.comments}}</td>
+                        <td width="10" align="center"><a href="{% url 'payment_detail' p.id %}" class='btn btn-warning btn-sm'>+</a></td>
+                        <td width="10" align="center"><a href="{% url 'payment_delete' p.id %}" class='btn btn-secondary btn-sm'>x</a></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

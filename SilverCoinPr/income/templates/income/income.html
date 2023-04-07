@@ -1,0 +1,77 @@
+{% extends 'registers/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container-fluid">
+
+
+<!--    форма создания поступления-->
+    <div class="row p-2 g-3" >
+        <div class="col-md-3 border p-3 shadow">
+            <h4>Add income</h4>
+            <form  method='POST'>
+                {% csrf_token %}
+                {{ form_add|crispy }}
+                <br>
+                <input class="btn btn-info btn-block" type="submit" name="btn_create" value="ADD NEW">
+            </form>
+        </div>
+
+<!--    форма фильтра-->
+        <div class="col-md-9 border p-1 shadow">
+            <div class="row p-1 g-1">
+                <form action="" method="GET">
+                    {% csrf_token %}
+                    <div class="row p-1 g-1 align-items-center">
+                        <div class="col-md-1">
+                            <h5>filter:</h5>
+                        </div>
+                        <div class="col-md-2">
+                            from {{ form_filter.date|as_crispy_field }}
+                        </div>
+                        <div class="col-md-2">
+                            to {{ form_filter.date_end|as_crispy_field }}
+                        </div>
+                        <div class="col-md-3">
+                            {{ form_filter.counterparty|as_crispy_field }}
+                        </div>
+                        <div class="col-md-3">
+                              {{ form_filter.item|as_crispy_field }}
+                        </div>
+                        <div class="col-md-1">
+                          <input class="btn btn-info btn-block" type="submit" name="btn_show" value="SHOW">
+                        </div>
+                    </div>
+                </form>
+<!--            <hr>-->
+<!--        форма таблицы поступлений-->
+            <div class="row p-1 g-1">
+                <div class="table-responsive" style="height: 450px">
+                    <table class="table table-sm table-scroll table-striped table-bordered" >
+                        <tr>
+                            <th align="center">Date</th>
+                            <th align="center">Amount</th>
+                            <th>Counterparty</th>
+                            <th>Item</th>
+                            <th>Comments</th>
+                            <th>Edit</th>
+                            <th>Del</th>
+                        </tr>
+                        {% for i in income %}
+                        <tr>
+                            <td width="100" align="right">{{i.date|date:"d.m.Y"}}</td>
+                            <td width="100" align="right">{{i.amount}}</td>
+                            <td width="150">{{i.counterparty}}</td>
+                            <td width="150">{{i.item}}</td>
+                            <td width="200">{{i.comments}}</td>
+                            <td width="10" align="center"><a href="{% url 'income_detail' i.id %}" class='btn btn-warning btn-sm'>+</a></td>
+                            <td width="10" align="center"><a href="{% url 'income_delete' i.id %}" class='btn btn-secondary btn-sm'>x</a></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

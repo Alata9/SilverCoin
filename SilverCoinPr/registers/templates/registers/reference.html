@@ -1,0 +1,118 @@
+{% extends 'registers/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container-fluid">
+
+<!--    форма добавления контрагента-->
+    <div class="row">
+        <div class="col-md-4 border p-2 shadow">
+            <form  method='POST'>
+                <div class="row p-2 g-3">
+                    <div class="col-md-10">
+                        {% csrf_token %}
+                        {{ form1|crispy }}
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-info" type="submit" name="btn_save_counterparty">ADD NEW</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+<!--    форма добавления статьи прихода-->
+        <div class="col-md-4 border p-2 shadow">
+            <form  method='POST'>
+                <div class="row p-2 g-3">
+                    <div class="col-md-10">
+                        {% csrf_token %}
+                        {{ form2|crispy }}
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-info" type="submit" name="btn_save_income">ADD NEW</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+ <!--    форма добавления статьи расхода-->
+        <div class="col-md-4 border p-2 shadow">
+            <form  method='POST'>
+                <div class="row p-2 g-3">
+                    <div class="col-md-10">
+                        {% csrf_token %}
+                        {{ form3|crispy }}
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-info" type="submit" name="btn_save_expense">ADD NEW</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+    <!--    таблица контрагентов-->
+    <div class="row">
+        <div class="col-md-4 border p-3 shadow">
+            <div class="table-responsive" style="height: 430px">
+                <table class="table table-sm table-striped table-bordered">
+                    <tr>
+                        <th>Counterparties</th>
+                        <th>Edit</th>
+                        <th>Del</th>
+                    </tr>
+                    {% for p in counterparties %}
+                    <tr>
+                        <td width="300">{{p.counterparty}}</td>
+                        <td width="10" align="center"><a href="{% url 'counterparty_detail' p.id %}" class='btn btn-warning btn-sm'>+</a></td>
+                        <td width="10" align="center"><a href="{% url 'counterparty_delete' p.id %}" class='btn btn-secondary btn-sm'>x</a></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+
+            <!--    таблица статей доходов-->
+        <div class="col-md-4 border p-3 shadow">
+            <div class="table-responsive" style="height: 430px">
+                <table class="table table-sm table-striped table-bordered">
+                    <tr>
+                        <th>Income items</th>
+                        <th>Edit</th>
+                        <th>Del</th>
+                    </tr>
+                    {% for p in income_item %}
+                    <tr>
+                        <td width="300">{{p.income_item}}</td>
+                        <td width="10" align="center"><a href="{% url 'income_item_detail' p.id %}" class='btn btn-warning btn-sm'>+</a></td>
+                        <td width="10" align="center"><a href="{% url 'income_item_delete' p.id %}" class='btn btn-secondary btn-sm'>x</a></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+
+            <!--    таблица статей расходов-->
+        <div class="col-md-4 border p-3 shadow">
+            <div class="table-responsive" style="height: 430px">
+                <table class="table table-sm table-striped table-bordered">
+                    <tr>
+                        <th>Expense items</th>
+                        <th>Edit</th>
+                        <th>Del</th>
+                    </tr>
+                {% for p in pay_item %}
+                    <tr>
+                        <td width="300">{{p.expense}}</td>
+                        <td width="10" align="center"><a href="{% url 'expenses_detail' p.id %}" class='btn btn-warning btn-sm'>+</a></td>
+                        <td width="10" align="center"><a href="{% url 'expenses_delete' p.id %}" class='btn btn-secondary btn-sm'>x</a></td>
+                    </tr>
+                {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

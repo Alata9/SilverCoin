@@ -1,0 +1,21 @@
+{% extends 'registers/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row h-100 p-2 g-3 justify-content-center" >
+        <div class="col-md-4 border p-3 shadow">
+            <h5>You cannot delete an entry.</h5>
+            <H5>There are related entries in the payment or receipt registers.</H5>
+            <H5>First you need to remove or change them.</H5>
+          <br>
+            <div class="row">
+                <div class="col-md-2">
+                    <a href="/reference" class='btn btn-light'>Ok, I see</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,33 @@
+<!--МОДАЛЬНОЕ ОКНО-->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role='dialog' aria-labelledby="exampleModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ title }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+      </div>
+      <div class="modal-body">
+          <div class="container-fluid">
+              <div class="row text-center">
+                    <p>{{ detail.income }}</p>
+              </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+        <button class="btn btn-info" type="submit" name="btn_update_income">Update</button>
+        <button class="btn btn-dark" type="submit" name="btn_del_income">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--КНОПКА ДЛЯ МОДАЛЬНОГО ОКНА-->
+
+<a href="#" class='btn btn-light btn-sm' data-toggle="modal" data-target="#exampleModal">open modal</a>
+
+
+<!--LOGO-->
+<img scr="{% static 'registers/images/3.ico' %}>

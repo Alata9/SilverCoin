@@ -1,0 +1,51 @@
+{% extends 'registers/base.html' %}
+{% load static %}
+{% block content %}
+<title>Start</title>
+
+<div class="container-sm">
+<!--    <div class="row p-2 g-3 h-20%"></div>-->
+    <div class="row p-2 g-3 h-60">
+    <div class="col-md-1">
+        <br><br><br>
+    </div>
+    <div class="col-md-10">
+        <div class="row p-2 g-3">
+            <div class="col-md-4 text-center">
+                <a href="{% url 'reference' %}"><img src="{% static 'registers/images/5.ico' %}"/></a>
+                <a class="text-decoration-none text-dark" href="{% url 'reference' %}"><h3>Reference books</h3></a>
+            </div>
+            <div class="col-md-4 text-center">
+                <a href="{% url 'income' %}"><img src="{% static 'registers/images/4.ico' %}"/></a>
+                <a class="text-decoration-none text-dark" href="{% url 'income' %}"><h3>Income</h3></a>
+            </div>
+            <div class="col-md-4 text-center">
+                <a href="{% url 'payments' %}"><img src="{% static 'registers/images/3.ico' %}"/></a>
+                <a class="text-decoration-none text-dark" href="{% url 'payments' %}"><h3>Payments</h3></a>
+            </div>
+        </div>
+
+        <div class="row p-2 g-3">
+            <div class="col-md-4 text-center">
+                <a href="{% url 'reports' %}"><img src="{% static 'registers/images/2.ico' %}"/></a>
+                <a class="text-decoration-none text-dark" href="{% url 'reports' %}"><h3>Reports</h3></a>
+            </div>
+            <div class="col-md-4 text-center">
+                <a href="{% url 'diagrams' %}"><img src="{% static 'registers/images/6.ico' %}"/></a>
+                <a class="text-decoration-none text-dark" href="{% url 'diagrams' %}"><h3>Diagrams</h3></a>
+            </div>
+            <div class="col-md-4 text-center">
+                <a href="{% url 'instruction' %}"><img src="{% static 'registers/images/1.ico' %}"/></a>
+                <a class="text-decoration-none text-dark" href="{% url 'instruction' %}"><h2>Instructions</h2></a>
+            </div>
+        </div>
+    </div>
+<!--    <div class="col-md-1">-->
+<!--        <br><br><br>-->
+<!--    </div>-->
+    </div>
+<!--    <div class="row p-2 g-3 h-20%"></div>-->
+</div>
+
+
+{% endblock %}

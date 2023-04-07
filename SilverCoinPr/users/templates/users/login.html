@@ -1,0 +1,22 @@
+{% extends 'registers/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<title>Create an account</title>
+
+<div class="container-fluid">
+    <div class="row h-100 p-2 g-4 justify-content-center" >
+        <div class="col-md-3 border p-3 shadow">
+            <h1>Create an account</h1>
+            <br>
+            <form method="post">
+                {% csrf_token %}
+                {{ form|crispy}}
+                <br>
+                <input class="btn btn-info btn-block" type="submit" value="Create">
+                <div class="form-error">{{ f.error }}</div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

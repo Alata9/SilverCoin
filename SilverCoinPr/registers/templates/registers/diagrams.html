@@ -1,0 +1,145 @@
+{% extends 'registers/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% load static %}
+
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script>
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart_income);
+      google.charts.setOnLoadCallback(drawChart_payments);
+      google.charts.setOnLoadCallback(drawChart_income_columns);
+      google.charts.setOnLoadCallback(drawChart_payments_columns);
+
+<!--структура и гистограмма доходов--->
+      function drawChart_income() {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Items');
+        data.addColumn('number', 'Amount');
+        data.addRows({{ data_income|safe }});
+
+        var options = {
+                       'width':350,
+                       'height':200,
+                       'is3D': true,
+                       'legend': 'right'};
+
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div_1'));
+        chart.draw(data, options);
+
+        var chart = new google.visualization.BarChart(document.getElementById('chart_div_2'));
+        chart.draw(data, options);
+      }
+
+
+<!--структура и гистограмма расходов--->
+      function drawChart_payments() {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Items');
+        data.addColumn('number', 'Amount');
+        data.addRows({{ data_payments|safe }});
+
+        var options = {
+                       'width':350,
+                       'height':200,
+                       'is3D': true,
+                       'legend': 'right'};
+
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div_4'));
+        chart.draw(data, options);
+
+        var chart = new google.visualization.BarChart(document.getElementById('chart_div_5'));
+        chart.draw(data, options);
+
+      }
+
+<!--стобцы доходов-->
+      function drawChart_income_columns() {
+        var data = google.visualization.arrayToDataTable({{ data_income_columns|safe }});
+
+        var options = {
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div_3'));
+        chart.draw(data, options);
+      }
+
+<!--стобцы расходов-->
+      function drawChart_payment_columns) {
+        var data = google.visualization.arrayToDataTable({{ data_payments_columns|safe }});
+
+        var options = {
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div_6'));
+        chart.draw(data, options);
+      }
+</script>
+
+
+<div class="container-fluid">
+<script src="{% static 'registers/js/scripts.js' %}" type="text/javascript"></script>
+    <div class="row p-1 g-1">
+        <div class="col-md-2 border p-3 shadow">
+<!--            <h3>Use filters:</h3>-->
+            <form  method='GET'>
+                <div class="row p-2 g-3">
+                    <div class="col-md-10">
+                        <h4>Set year:</h4>
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                        <br>
+                        <button class="btn btn-info" type="submit" name="btn_show">SHOW</button>
+                    </div>
+                </div>
+            <br>
+<!--            <form  method='POST'>-->
+<!--                {% csrf_token %}-->
+<!--                {{ form|crispy }}-->
+<!--                <br>-->
+<!--                <input class="btn btn-info btn-block" type="submit" name="btn_show" value="Show diagrams">-->
+<!--            </form>-->
+        </div>
+        <div class="col-md-10 border p-2 shadow">
+            <div class="row p-1 g-1">
+                <div class="col-md-4 border p-3 shadow">
+                    <h6>Income structure</h6>
+                    <div id="chart_div_1"></div>
+                </div>
+                <div class="col-md-4 border p-3 shadow">
+                    <h6>Bar chart of income</h6>
+                    <div id="chart_div_2"></div>
+                </div>
+                <div class="col-md-4 border p-3 shadow">
+                    <h6>Income dynamics</h6>
+                    <div id="chart_div_3"></div>
+                </div>
+            </div>
+            <br>
+
+
+            <div class="row p-1 g-1">
+                <div class="col-md-4 border p-2 shadow">
+                    <h6>Expenses structure</h6>
+                    <div id="chart_div_4"></div>
+                </div>
+                <div class="col-md-4 border p-3 shadow">
+                    <h6>Bar chart of expenses</h6>
+                    <div id="chart_div_5"></div>
+                </div>
+                <div class="col-md-4 border p-3 shadow">
+                    <h6>Expenses dynamics</h6>
+                    <div id="chart_div_6"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

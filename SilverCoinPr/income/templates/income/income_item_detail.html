@@ -1,0 +1,27 @@
+{% extends 'registers/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row h-100 p-2 g-3 justify-content-center" >
+        <div class="col-md-4 border p-3 shadow">
+            <h3>Edit recording</h3>
+            <br>
+            <form method="post">
+                {% csrf_token %}
+                {{ form|crispy}}
+                <br>
+                <div class="row">
+                    <div class="col-md-2">
+                        <button class="btn btn-info" type="submit" name="btn_update_incomes">Update</button>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="/reference" class='btn btn-light'>Cancel</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

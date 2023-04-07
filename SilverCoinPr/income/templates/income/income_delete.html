@@ -1,0 +1,27 @@
+{% extends 'registers/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row h-100 p-2 g-3 justify-content-center" >
+        <div class="col-md-4 border p-3 shadow">
+            <h5>Are you sure you want to delete?</h5>
+            <br>
+            <form method="post">
+                {% csrf_token %}
+<!--                {{ pk.income }}-->
+                <br>
+                <div class="row">
+                    <div class="col-md-2">
+                        <button class="btn btn-dark" type="submit" name="btn_del_income">Delete</button>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="/income" class='btn btn-light'>Cancel</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
